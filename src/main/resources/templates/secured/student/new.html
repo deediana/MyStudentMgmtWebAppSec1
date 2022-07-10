@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>E-Registrar - New Student</title>
+  <style>
+    a.std-lnk-btn {
+      text-decoration:none;color: #000000;border: 1px solid #000000;padding: 0.20em;background-color: #efefef;
+    }
+    input.std-btn {
+      color: #000000;border: 1px solid #000000;padding: 0.35em;background-color: #efefef;
+    }
+  </style>
+</head>
+<body>
+<header th:replace="fragments/header :: header"></header>
+  <main>
+    <h1>New Student Form</h1>
+    <div style="border: 1px solid;padding: 1em;">
+      <div>
+        Fields marked with asterisk(*) are required
+      </div>
+      <form method="post" action="/e-registrar/student/new" th:object="${student}">
+      <fieldset>
+        <div>
+          <label>Student Name*</label>
+        </div>
+        <div>
+          <div><span th:if="${#fields.hasErrors('name')}" th:errors="*{name}" style="color:red;"></span></div>
+          <input name="name" type="text" th:value="${student.name}" autofocus>
+        </div>
+      </fieldset>
+        <fieldset>
+          <div>
+            <label>Student Number</label>
+          </div>
+          <div>
+            <div><span th:if="${#fields.hasErrors('studentNumber')}" th:errors="*{studentNumber}" style="color:red;"></span></div>
+            <input name="studentNumber" type="text" th:value="${student.studentNumber}">
+          </div>
+        </fieldset>
+        <fieldset>
+          <div>
+            <label>CGPA</label>
+          </div>
+          <div>
+            <div><span th:if="${#fields.hasErrors('cgpa')}" th:errors="*{cgpa}"></span></div>
+            <input name="cgpa" type="text" th:value="${student.cgpa}">
+          </div>
+        </fieldset>
+        <fieldset>
+          <div>
+            <label>Admission date</label>
+          </div>
+          <div>
+            <div><span th:if="${#fields.hasErrors('admissionDate')}" th:errors="*{admissionDate}"></span></div>
+            <input name="admissionDate" type="date" th:value="${student.admissionDate}">
+          </div>
+        </fieldset>
+      <fieldset>
+        <legend>Transcript</legend>
+        <div>
+          <label>Degree Title</label>
+        </div>
+        <div>
+          <input name="degree title" type="text" th:field="*{transcript.degreeTitle}">
+        </div>
+      </fieldset>
+      <div style="margin-top: 1em;">
+        <a class="std-lnk-btn" href="/e-registrar/student/list">Cancel</a>
+        <input class="std-btn" type="reset" value="Reset">
+        <input class="std-btn" type="submit" value="Add Student">
+      </div>
+    </form>
+    </div>
+  </main>
+</body>
+</html>
